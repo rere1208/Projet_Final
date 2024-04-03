@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio en ligne</title>
+    <link rel="stylesheet" href="CSS/style.css"> <!-- Lien vers le fichier CSS -->
+    <script src="JS/script.js" defer></script> <!-- Lien vers le fichier JavaScript -->
+</head>
+<body>
+    <header>
+        <h1>Radio en ligne</h1> <!-- Titre de l'application -->
+    </header>
+    <main>
+        <section class="playlist">
+            <h2>Ma Playlist</h2> <!-- Titre de la section de la playlist -->
+            <ul>
+                <!-- Les éléments li seront ajoutés dynamiquement par JavaScript -->
+            </ul>
+        </section>
+        <section class="player">
+            <h2>Lecteur</h2> <!-- Titre de la section du lecteur audio -->
+            <p>Musique en cours : <span id="musicNameDisplay">Aucune</span></p> <!-- Affichage du nom de la musique en cours -->
+            <audio id="audioPlayer" controls> <!-- Balise audio pour le lecteur audio -->
+                Your browser does not support the audio element.
+            </audio>
+            <div class="controls">
+                <button id="play">Play</button> <!-- Bouton Play -->
+                <button id="pause">Pause</button> <!-- Bouton Pause -->
+                <button id="stop">Stop</button> <!-- Bouton Stop -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Radio en ligne. Tous droits réservés.</p> <!-- Copyright -->
+    </footer>
+</body>
+</html>
