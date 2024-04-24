@@ -1,42 +1,149 @@
+/* Réinitialisation des styles de base */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
+/* Styles pour l'en-tête */
 header {
     background-color: #333;
     color: #fff;
     text-align: center;
     padding: 20px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ajoute une ombre légère */
 }
 
 header h1 {
     margin: 0;
 }
 
+/* Styles pour la section principale */
 main {
     display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
 }
 
-ul {
+/* Styles pour la playlist */
+.playlist {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 80%;
+}
+
+.playlist h2 {
+    margin-top: 0;
+}
+
+.playlist ul {
     list-style-type: none;
     padding: 0;
 }
 
-ul li {
-    cursor: pointer; /* Style de curseur pointer pour rendre les éléments de liste cliquables */
+.playlist li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
 }
 
+.playlist li:last-child {
+    border-bottom: none;
+}
+
+/* Styles pour le lecteur audio */
+.player {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 80%;
+}
+
+.player h2 {
+    margin-top: 0;
+}
+
+.controls {
+    margin-top: 10px;
+}
+
+.controls button {
+    margin-right: 10px;
+}
+
+/* Styles pour la barre de progression */
+.progress {
+    width: 80%;
+}
+
+/* Styles pour l'equalizer */
+.equalizer {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 80%;
+}
+
+.equalizer h2 {
+    margin-top: 0;
+}
+
+.equalizer-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.equalizer-controls label {
+    margin-bottom: 5px;
+}
+
+/* Styles pour le pied de page */
 footer {
     background-color: #333;
     color: #fff;
     text-align: center;
     padding: 10px 0;
-    position: fixed;
-    bottom: 0;
     width: 100%;
+}
+
+/* Styles pour l'image de fond */
+body {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Styles pour l'image de fond lors de la rotation */
+body.rotate {
+    animation: rotateImage 10s linear infinite;
+}
+
+@keyframes rotateImage {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Styles pour l'effet de fondu enchaîné */
+body.fadeInOut {
+    animation: fadeInOut 5s infinite alternate;
+}
+
+@keyframes fadeInOut {
+    from {
+        opacity: 0.2;
+    }
+    to {
+        opacity: 1;
+    }
 }

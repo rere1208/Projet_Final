@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Radio en ligne</title>
     <link rel="stylesheet" href="CSS/style.css"> <!-- Lien vers le fichier CSS -->
-    <script src="JS/script.js" defer></script> <!-- Lien vers le fichier JavaScript -->
+    <script src="JS/playlist.js" defer></script> <!-- Lien vers le fichier JavaScript de la playlist -->
+    <script src="JS/script.js" defer></script> <!-- Lien vers le fichier JavaScript principal -->
 </head>
 <body>
     <header>
@@ -28,6 +29,22 @@
                 <button id="play">Play</button> <!-- Bouton Play -->
                 <button id="pause">Pause</button> <!-- Bouton Pause -->
                 <button id="stop">Stop</button> <!-- Bouton Stop -->
+                <button id="repeat">Répéter</button> <!-- Bouton Répéter -->
+            </div>
+        </section>
+        <section class="progress">
+            <progress id="progressBar" value="0" max="100"></progress> <!-- Barre de progression de l'audio -->
+            <span id="currentTime">00:00</span> / <span id="duration">00:00</span> <!-- Temps écoulé / Durée totale -->
+        </section>
+        <section class="equalizer">
+            <h2>Égaliseur audio</h2>
+            <div class="equalizer-controls">
+                <label for="bass">Basse</label>
+                <input type="range" id="bass" min="0" max="100" value="50">
+                <label for="mid">Médium</label>
+                <input type="range" id="mid" min="0" max="100" value="50">
+                <label for="treble">Aigus</label>
+                <input type="range" id="treble" min="0" max="100" value="50">
             </div>
         </section>
     </main>

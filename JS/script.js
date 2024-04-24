@@ -6,48 +6,82 @@ document.addEventListener('DOMContentLoaded', function() {
     const playButton = document.getElementById('play');
     const pauseButton = document.getElementById('pause');
     const stopButton = document.getElementById('stop');
+    const repeatButton = document.getElementById('repeat');
 
-    // Récupérer la section de la playlist
-    const playlist = document.querySelector('.playlist ul');
+    // Récupérer la barre de progression
+    const progressBar = document.getElementById('progressBar');
+    const currentTimeDisplay = document.getElementById('currentTime');
+    const durationDisplay = document.getElementById('duration');
 
-    // Fonction pour ajouter une nouvelle musique à la playlist
-    function addMusicToPlaylist(musicName, musicSrc) {
-        // Créer un nouvel élément li
-        const newMusic = document.createElement('li');
-        newMusic.textContent = musicName;
-        // Ajouter un gestionnaire d'événements pour lire la musique lorsque l'élément est cliqué
-        newMusic.addEventListener('click', function() {
-            audioPlayer.src = musicSrc;
-            audioPlayer.play();
-            updateCurrentMusicName(musicName);
-        });
-        // Ajouter le nouvel élément li à la liste de lecture
-        playlist.appendChild(newMusic);
+    // Mise à jour de la barre de progression et des informations temporelles
+    function updateProgressBar() {
+        if (!isNaN(audioPlayer.duration) && isFinite(audioPlayer.duration)) {
+            const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+            progressBar.value = progress;
+            currentTimeDisplay.textContent = formatTime(audioPlayer.currentTime);
+            durationDisplay.textContent = formatTime(audioPlayer.duration);
+        }
     }
 
-    // Ajouter des musiques existantes à la playlist
-    addMusicToPlaylist("KINGDOM HEARTS - Dearly Beloved - All Versions 2002-2017", "upload/music/KINGDOM HEARTS - Dearly Beloved - All Versions 2002-2017.mp4");
-    addMusicToPlaylist("Dont Think Twice", "upload/music/Dont Think Twice.mp4");
-    addMusicToPlaylist("Sanctuary (Ending)", "upload/music/Sanctuary (Ending).mp4.mp4");
-
-    function updateCurrentMusicName(musicName) {
-        const musicNameDisplay = document.getElementById('musicNameDisplay');
-        musicNameDisplay.textContent = musicName;
+    // Formatage du temps au format hh:mm:ss
+    function formatTime(time) {
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60);
+        return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
     }
+
+    // Mise à jour de la barre de progression pendant la lecture
+    audioPlayer.addEventListener('timeupdate', updateProgressBar);
+
+    // Gestion de l'événement de clic sur la barre de progression
+    progressBar.addEventListener('click', function(event) {
+        const newPosition = (event.offsetX / this.offsetWidth) * audioPlayer.duration;
+        audioPlayer.currentTime = newPosition;
+    });
 
     // Ajouter un événement au bouton Play
     playButton.addEventListener('click', function() {
         audioPlayer.play();
+        enableAnimations(); // Réactiver les animations lorsque la musique démarre
     });
 
     // Ajouter un événement au bouton Pause
     pauseButton.addEventListener('click', function() {
         audioPlayer.pause();
+        disableAnimations(); // Désactiver les animations lorsque la musique est en pause
     });
 
     // Ajouter un événement au bouton Stop
     stopButton.addEventListener('click', function() {
         audioPlayer.pause();
         audioPlayer.currentTime = 0;
+        disableAnimations(); // Désactiver les animations lorsque la musique est arrêtée
+    });
+
+    // Ajouter un événement au bouton Répéter
+    repeatButton.addEventListener('click', function() {
+        audioPlayer.currentTime = 0;
+        audioPlayer.play();
+        enableAnimations(); // Réactiver les animations lorsque la musique démarre à nouveau
+    });
+
+    // Fonction pour désactiver les animations
+    function disableAnimations() {
+        document.body.classList.add('no-animation');
+    }
+
+    // Fonction pour réactiver les animations
+    function enableAnimations() {
+        document.body.classList.remove('no-animation');
+    }
+
+    // Vérifier l'état de lecture de la musique et désactiver les animations si la musique est en pause
+    audioPlayer.addEventListener('pause', function() {
+        disableAnimations();
+    });
+
+    // Vérifier l'état de lecture de la musique et réactiver les animations si la musique est en cours de lecture
+    audioPlayer.addEventListener('play', function() {
+        enableAnimations();
     });
 });
