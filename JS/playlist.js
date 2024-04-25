@@ -1,39 +1,27 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Récupérer la section de la playlist
-    const playlist = document.querySelector('.playlist ul');
+    // Récupérer les jaquettes d'albums
+    const albumCovers = document.querySelectorAll('.album-covers img');
 
-    // Créer une structure de données pour associer chaque musique à son fond d'écran
-    const musicBackgrounds = {
-        "KINGDOM HEARTS - Dearly Beloved - All Versions 2002-2017": "url('upload/Images/Kingdom_Hearts_Logo.png')",
-        "Dont Think Twice": "url('upload/Images/imagekh3.jpg')",
-        "Sanctuary (Ending)" : "url('upload/Images/Sactuary.jpg')"
+    // Créer une structure de données pour associer chaque jaquette à son fichier audio
+    const musicSrcs = {
+        "path_to_audio_1.mp3": "KINGDOM HEARTS - Dearly Beloved - All Versions 2002-2017",
+        "path_to_audio_2.mp3": "Dont Think Twice"
+        // Ajoutez d'autres associations pour chaque jaquette
     };
 
-    // Fonction pour ajouter une nouvelle musique à la playlist
-    function addMusicToPlaylist(musicName, musicSrc) {
-        // Créer un nouvel élément li
-        const newMusic = document.createElement('li');
-        newMusic.textContent = musicName;
-        // Ajouter un gestionnaire d'événements pour lire la musique lorsque l'élément est cliqué
-        newMusic.addEventListener('click', function() {
-            audioPlayer.src = musicSrc;
-            audioPlayer.play();
-            updateCurrentMusicName(musicName);
-            updateBackground(musicName);
+    // Ajouter un événement de clic à chaque jaquette
+    albumCovers.forEach(function(cover) {
+        cover.addEventListener('click', function() {
+            const musicSrc = this.getAttribute('data-src');
+            const musicName = musicSrcs[musicSrc];
+            if (musicSrc && musicName) {
+                audioPlayer.src = musicSrc;
+                audioPlayer.play();
+                updateCurrentMusicName(musicName);
+                updateBackground(musicName);
+            }
         });
-        // Ajouter le nouvel élément li à la liste de lecture
-        playlist.appendChild(newMusic);
-    }
-
-    // Fonction pour supprimer une musique de la playlist
-    function removeMusicFromPlaylist(musicElement) {
-        playlist.removeChild(musicElement);
-    }
-
-    // Ajouter des musiques existantes à la playlist
-    addMusicToPlaylist("KINGDOM HEARTS - Dearly Beloved - All Versions 2002-2017", "upload/music/KINGDOM HEARTS - Dearly Beloved - All Versions 2002-2017.mp4");
-    addMusicToPlaylist("Dont Think Twice", "upload/music/Dont Think Twice.mp4");
-    addMusicToPlaylist("Sanctuary (Ending)", "upload/music/Sanctuary (Ending).mp4");
+    });
 
     function updateCurrentMusicName(musicName) {
         const musicNameDisplay = document.getElementById('musicNameDisplay');

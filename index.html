@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Radio en ligne</title>
     <link rel="stylesheet" href="CSS/style.css"> <!-- Lien vers le fichier CSS -->
-    <script src="JS/playlist.js" defer></script> <!-- Lien vers le fichier JavaScript de la playlist -->
     <script src="JS/script.js" defer></script> <!-- Lien vers le fichier JavaScript principal -->
 </head>
 <body>
@@ -15,26 +14,37 @@
     <main>
         <section class="playlist">
             <h2>Ma Playlist</h2> <!-- Titre de la section de la playlist -->
-            <ul>
-                <!-- Les éléments li seront ajoutés dynamiquement par JavaScript -->
+            <ul> <!-- Liste non ordonnée pour les éléments de la playlist -->
+                <li class="music-item" data-src="upload/music/KINGDOM HEARTS - Dearly Beloved - All Versions 2002-2017.mp4">
+                    <img src="upload/Images/Kingdom_Hearts_Logo.png" alt="KINGDOM HEARTS - Dearly Beloved - All Versions 2002-2017">
+                    <p class="music-title">KINGDOM HEARTS - Dearly Beloved - All Versions 2002-2017</p>
+                </li>
+                <li class="music-item" data-src="upload/music/Dont Think Twice.mp4">
+                    <img src="upload/Images/imagekh3.jpg" alt="Dont Think Twice">
+                    <p class="music-title">Dont Think Twice</p>
+                </li>
+                <li class="music-item" data-src="upload/music/Sanctuary (Ending).mp4">
+                    <img src="upload/Images/Sactuary.jpg" alt="Sanctuary (Ending)">
+                    <p class="music-title">Sanctuary (Ending)</p>
+                </li>
+                <!-- Ajoutez d'autres éléments li pour chaque musique avec les jaquettes et les titres correspondants -->
             </ul>
         </section>
+        
         <section class="player">
             <h2>Lecteur</h2> <!-- Titre de la section du lecteur audio -->
-            <p>Musique en cours : <span id="musicNameDisplay">Aucune</span></p> <!-- Affichage du nom de la musique en cours -->
-            <audio id="audioPlayer" controls> <!-- Balise audio pour le lecteur audio -->
-                Your browser does not support the audio element.
-            </audio>
-            <div class="controls">
-                <button id="play">Play</button> <!-- Bouton Play -->
-                <button id="pause">Pause</button> <!-- Bouton Pause -->
-                <button id="stop">Stop</button> <!-- Bouton Stop -->
-                <button id="repeat">Répéter</button> <!-- Bouton Répéter -->
+            <div id="audio-controls"> <!-- Identifiant ajouté pour regrouper les contrôles audio -->
+                <p>Musique en cours : <span id="musicNameDisplay">Aucune</span></p> <!-- Affichage du nom de la musique en cours -->
+                <audio id="audioPlayer" controls> <!-- Balise audio pour le lecteur audio -->
+                    Your browser does not support the audio element.
+                </audio>
+                <div class="controls"> <!-- Conteneur pour les boutons de contrôle -->
+                    <button id="play">Play</button> <!-- Bouton Play -->
+                    <button id="pause">Pause</button> <!-- Bouton Pause -->
+                    <button id="stop">Stop</button> <!-- Bouton Stop -->
+                    <button id="repeat">Répéter</button> <!-- Bouton Répéter -->
+                </div>
             </div>
-        </section>
-        <section class="progress">
-            <progress id="progressBar" value="0" max="100"></progress> <!-- Barre de progression de l'audio -->
-            <span id="currentTime">00:00</span> / <span id="duration">00:00</span> <!-- Temps écoulé / Durée totale -->
         </section>
         <section class="equalizer">
             <h2>Égaliseur audio</h2>

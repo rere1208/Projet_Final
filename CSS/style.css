@@ -11,7 +11,7 @@ header {
     color: #fff;
     text-align: center;
     padding: 20px 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ajoute une ombre légère */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
@@ -28,6 +28,9 @@ main {
 
 /* Styles pour la playlist */
 .playlist {
+    display: flex; /* Utiliser le modèle de boîte flex pour aligner les éléments sur la même ligne */
+    flex-wrap: wrap; /* Permettre le retour à la ligne des éléments lorsque l'espace est insuffisant */
+    justify-content: space-between; /* Distribuer les éléments horizontalement avec un espacement égal entre eux */
     background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -38,20 +41,39 @@ main {
 
 .playlist h2 {
     margin-top: 0;
+    font-weight: bold; /* Assure que le titre est en gras */
+    font-size: 1.5rem; /* Taille de police plus grande pour le titre */
 }
 
 .playlist ul {
     list-style-type: none;
     padding: 0;
+    display: flex; /* Utiliser le modèle de boîte flex pour aligner les éléments sur la même ligne */
+    flex-wrap: wrap; /* Permettre le retour à la ligne des éléments lorsque l'espace est insuffisant */
+    justify-content: space-between; /* Distribuer les éléments horizontalement avec un espacement égal entre eux */
+    width: 100%; /* Assurer que la liste occupe toute la largeur de son conteneur */
 }
 
 .playlist li {
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
+    flex: 0 1 calc(30% - 20px); /* Définir la largeur des éléments pour qu'il y ait 3 éléments par ligne, en tenant compte de la marge */
+    padding: 10px; /* Espacement interne pour chaque élément */
+    margin-bottom: 20px; /* Espacement vertical entre les lignes d'éléments */
+    border: 1px solid #ccc; /* Ajouter une bordure autour de chaque élément */
+    border-radius: 5px; /* Ajouter un arrondi aux coins de chaque élément */
+    transition: background-color 0.3s;
+}
+
+.playlist li:hover {
+    background-color: #e0e0e0;
 }
 
 .playlist li:last-child {
-    border-bottom: none;
+    margin-bottom: 0; /* Supprimer l'espacement en bas du dernier élément de chaque ligne */
+}
+
+.playlist li img {
+    max-width: 100%; /* Assurer que les images s'adaptent à la largeur de leur conteneur */
+    height: auto;
 }
 
 /* Styles pour le lecteur audio */
@@ -60,7 +82,6 @@ main {
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin-bottom: 20px;
     width: 80%;
 }
 
@@ -79,6 +100,7 @@ main {
 /* Styles pour la barre de progression */
 .progress {
     width: 80%;
+    text-align: center;
 }
 
 /* Styles pour l'equalizer */
@@ -111,39 +133,4 @@ footer {
     text-align: center;
     padding: 10px 0;
     width: 100%;
-}
-
-/* Styles pour l'image de fond */
-body {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-/* Styles pour l'image de fond lors de la rotation */
-body.rotate {
-    animation: rotateImage 10s linear infinite;
-}
-
-@keyframes rotateImage {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* Styles pour l'effet de fondu enchaîné */
-body.fadeInOut {
-    animation: fadeInOut 5s infinite alternate;
-}
-
-@keyframes fadeInOut {
-    from {
-        opacity: 0.2;
-    }
-    to {
-        opacity: 1;
-    }
 }
