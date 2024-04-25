@@ -61,6 +61,7 @@ main {
     border: 1px solid #ccc; /* Ajouter une bordure autour de chaque élément */
     border-radius: 5px; /* Ajouter un arrondi aux coins de chaque élément */
     transition: background-color 0.3s;
+    position: relative; /* Position relative pour pouvoir positionner l'indicateur de lecture */
 }
 
 .playlist li:hover {
@@ -74,6 +75,33 @@ main {
 .playlist li img {
     max-width: 100%; /* Assurer que les images s'adaptent à la largeur de leur conteneur */
     height: auto;
+}
+
+/* Ajouter l'indicateur de lecture */
+.playlist li.playing::before {
+    content: '\25B6'; /* Symbole de lecture */
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 1.5rem;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    border-radius: 50%;
+}
+
+/* Définir l'animation pour le changement de couleur */
+@keyframes colorChange {
+    0% { color: #ff0000; } /* Début de l'animation - rouge */
+    25% { color: #00ff00; } /* Après 25% de l'animation - vert */
+    50% { color: #0000ff; } /* Après 50% de l'animation - bleu */
+    75% { color: #ffff00; } /* Après 75% de l'animation - jaune */
+    100% { color: #ff00ff; } /* Fin de l'animation - magenta */
+}
+
+/* Ajouter l'animation au titre de la musique lorsqu'elle est en train de jouer */
+.playlist li.playing .music-title {
+    animation: colorChange 5s infinite; /* Nom de l'animation, durée, répétition infinie */
 }
 
 /* Styles pour le lecteur audio */
@@ -93,8 +121,16 @@ main {
     margin-top: 10px;
 }
 
-.controls button {
-    margin-right: 10px;
+.controls img {
+    width: 40px; /* Largeur des images */
+    height: 40px; /* Hauteur des images */
+    cursor: pointer; /* Curseur pointeur au survol */
+    transition: transform 0.2s; /* Transition pour l'animation */
+}
+
+/* Ajouter l'animation aux logos des boutons lorsqu'ils sont cliqués */
+.controls img:active {
+    transform: scale(0.8); /* Réduire la taille de l'image lorsqu'elle est cliquée */
 }
 
 /* Styles pour la barre de progression */
