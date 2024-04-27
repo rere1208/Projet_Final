@@ -170,3 +170,8 @@ footer {
     padding: 10px 0;
     width: 100%;
 }
+
+/* Ajouter une classe pour désactiver les animations */
+.no-animation .music-title {
+    animation: none !important; /* Annuler l'animation */
+}

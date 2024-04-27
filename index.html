@@ -35,17 +35,18 @@
             <h2>Lecteur</h2> <!-- Titre de la section du lecteur audio -->
             <div id="audio-controls"> <!-- Identifiant ajouté pour regrouper les contrôles audio -->
                 <p>Musique en cours : <span id="musicNameDisplay">Aucune</span></p> <!-- Affichage du nom de la musique en cours -->
-                <audio id="audioPlayer" controls> <!-- Balise audio pour le lecteur audio -->
+                <audio id="audioPlayer" controls> <!-- Balise audio pour le lecteur audio avec l'attribut "controls" -->
                     Your browser does not support the audio element.
                 </audio>
                 <div class="controls"> <!-- Conteneur pour les boutons de contrôle -->
-                    <img id="play" src="upload/Bouton/play.jpg" alt="Play"> <!-- Bouton Play -->
-                    <img id="pause" src="upload/Bouton/bouton.jpg" alt="Pause"> <!-- Bouton Pause -->
+                    <button id="playPauseButton" class="controls">
+                        <img id="playPauseIcon" src="upload/Bouton/play.jpg"  alt="Play"> <!-- Bouton Play/Pause -->
+                    </button>
                     <img id="stop" src="upload/Bouton/stop.jpg" alt="Stop"> <!-- Bouton Stop -->
                     <img id="repeat" src="upload/Bouton/repeat.png" alt="Répéter"> <!-- Bouton Répéter -->
                     <img id="random" src="upload/Bouton/aleatoire.jpg" alt="Aléatoire"> <!-- Bouton Aléatoire -->
                 </div>
-                
+               
             </div>
         </section>
         <section class="equalizer">

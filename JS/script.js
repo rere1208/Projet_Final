@@ -88,62 +88,45 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Récupérer le bouton de contrôle play/pause
+    const playPauseButton = document.getElementById('playPauseButton');
+    const playPauseIcon = document.getElementById('playPauseIcon');
+
+    // Ajouter un événement au bouton Play/Pause
+    playPauseButton.addEventListener('click', function() {
+        // Vérifier l'état de lecture de la musique
+        if (audioPlayer.paused) {
+            // Si la musique est en pause, démarrer la lecture et mettre à jour l'icône
+            audioPlayer.play();
+            playPauseIcon.src = "upload/Bouton/pause.jpg";
+        } else {
+            // Si la musique est en cours de lecture, mettre en pause et mettre à jour l'icône
+            audioPlayer.pause();
+            playPauseIcon.src = "upload/Bouton/play.jpg";
+        }
+    });
+
     // Récupérer les boutons de contrôle du lecteur audio
-    const playButton = document.getElementById('play');
-    const pauseButton = document.getElementById('pause');
     const stopButton = document.getElementById('stop');
     const repeatButton = document.getElementById('repeat');
     const randomButton = document.getElementById('random');
-
-    // Ajouter un événement au bouton Play
-    playButton.addEventListener('click', function() {
-        audioPlayer.play();
-        enableAnimations(); // Réactiver les animations lorsque la musique démarre
-    });
-
-    // Ajouter un événement au bouton Pause
-    pauseButton.addEventListener('click', function() {
-        audioPlayer.pause();
-        disableAnimations(); // Désactiver les animations lorsque la musique est en pause
-    });
 
     // Ajouter un événement au bouton Stop
     stopButton.addEventListener('click', function() {
         audioPlayer.pause();
         audioPlayer.currentTime = 0;
-        disableAnimations(); // Désactiver les animations lorsque la musique est arrêtée
+        document.body.classList.add('no-animation'); // Ajouter la classe 'no-animation' au body
     });
 
     // Ajouter un événement au bouton Répéter
     repeatButton.addEventListener('click', function() {
         audioPlayer.currentTime = 0;
         audioPlayer.play();
-        enableAnimations(); // Réactiver les animations lorsque la musique démarre à nouveau
     });
 
     // Ajouter un événement au bouton Aléatoire
     randomButton.addEventListener('click', function() {
         // Lancer la lecture d'une piste aléatoire
         playMusic(Math.floor(Math.random() * musicItems.length));
-    });
-
-    // Fonction pour désactiver les animations
-    function disableAnimations() {
-        document.body.classList.add('no-animation');
-    }
-
-    // Fonction pour réactiver les animations
-    function enableAnimations() {
-        document.body.classList.remove('no-animation');
-    }
-
-    // Vérifier l'état de lecture de la musique et désactiver les animations si la musique est en pause
-    audioPlayer.addEventListener('pause', function() {
-        disableAnimations();
-    });
-
-    // Vérifier l'état de lecture de la musique et réactiver les animations si la musique est en cours de lecture
-    audioPlayer.addEventListener('play', function() {
-        enableAnimations();
     });
 });
