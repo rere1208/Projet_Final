@@ -37,12 +37,15 @@ document.addEventListener('DOMContentLoaded', function() {
         markAsPlaying(musicItem);
         // Mettre à jour l'index de la piste en cours de lecture
         currentTrackIndex = index;
+        // Supprimer la classe 'no-animation' du body pour relancer les animations
+        document.body.classList.remove('no-animation');
     }
 
     // Mise à jour du nom de la musique affiché dans le lecteur
     function updateCurrentMusicName(musicName) {
         const musicNameDisplay = document.getElementById('musicNameDisplay');
         musicNameDisplay.textContent = musicName;
+        musicNameDisplay.style.display = 'block'; // Afficher le texte
     }
 
     // Mise à jour du fond d'écran en fonction de la musique (à adapter selon vos besoins)
@@ -98,11 +101,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (audioPlayer.paused) {
             // Si la musique est en pause, démarrer la lecture et mettre à jour l'icône
             audioPlayer.play();
-            playPauseIcon.src = "upload/Bouton/pause.jpg";
+            playPauseIcon.src = "upload/Bouton/play.jpg";
         } else {
             // Si la musique est en cours de lecture, mettre en pause et mettre à jour l'icône
             audioPlayer.pause();
-            playPauseIcon.src = "upload/Bouton/play.jpg";
+            playPauseIcon.src = "upload/Bouton/pause.jpg";
         }
     });
 
@@ -116,6 +119,12 @@ document.addEventListener('DOMContentLoaded', function() {
         audioPlayer.pause();
         audioPlayer.currentTime = 0;
         document.body.classList.add('no-animation'); // Ajouter la classe 'no-animation' au body
+        updateCurrentMusicName("Aucune"); // Réinitialiser le nom de la musique à "Aucune"
+        
+        // Supprimer la classe 'playing' de tous les éléments de musique
+        musicItems.forEach(function(item) {
+            item.classList.remove('playing');
+        });
     });
 
     // Ajouter un événement au bouton Répéter

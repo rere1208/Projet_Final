@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Radio en ligne</title>
     <link rel="stylesheet" href="CSS/style.css"> <!-- Lien vers le fichier CSS -->
+    <link rel="stylesheet" href="CSS/disque.css"> <!-- Lien vers le fichier CSS -->
     <script src="JS/script.js" defer></script> <!-- Lien vers le fichier JavaScript principal -->
 </head>
 <body>
@@ -35,6 +36,11 @@
             <h2>Lecteur</h2> <!-- Titre de la section du lecteur audio -->
             <div id="audio-controls"> <!-- Identifiant ajouté pour regrouper les contrôles audio -->
                 <p>Musique en cours : <span id="musicNameDisplay">Aucune</span></p> <!-- Affichage du nom de la musique en cours -->
+                <div class="disk-container">
+                    <div class="disk">
+                        <div class="hole"></div>
+                    </div>
+                </div> <!-- Conteneur pour le disque -->
                 <audio id="audioPlayer" controls> <!-- Balise audio pour le lecteur audio avec l'attribut "controls" -->
                     Your browser does not support the audio element.
                 </audio>

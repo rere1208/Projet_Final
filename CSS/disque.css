@@ -1,0 +1,20 @@
+/* Style du disque */
+.disk {
+    width: 200px; /* Largeur du disque */
+    height: 200px; /* Hauteur du disque */
+    background-color: #333; /* Couleur de fond du disque */
+    border-radius: 50%; /* Pour créer une forme de disque */
+    position: relative; /* Position relative pour pouvoir positionner le centre */
+}
+
+/* Style du trou au centre du disque */
+.hole {
+    width: 50px; /* Largeur du trou */
+    height: 50px; /* Hauteur du trou */
+    background-color: #000; /* Couleur de fond du trou */
+    border-radius: 50%; /* Pour créer une forme de cercle */
+    position: absolute; /* Position absolue pour placer le trou au centre */
+    top: 50%; /* Positionner le trou verticalement au centre */
+    left: 50%; /* Positionner le trou horizontalement au centre */
+    transform: translate(-50%, -50%); /* Déplacer le trou de moitié de sa taille vers le haut et la gauche */
+}
