@@ -1,0 +1,23 @@
+{
+    "playlist": [
+      {
+        "id": 1,
+        "title": "KINGDOM HEARTS - Dearly Beloved - All Versions 2002-2017",
+        "src": "upload/music/KINGDOM HEARTS - Dearly Beloved - All Versions 2002-2017.mp4",
+        "image": "upload/Images/Kingdom_Hearts_Logo.png"
+      },
+      {
+        "id": 2,
+        "title": "Dont Think Twice",
+        "src": "upload/music/Dont Think Twice.mp4",
+        "image": "upload/Images/imagekh3.jpg"
+      },
+      {
+        "id": 3,
+        "title": "Sanctuary (Ending)",
+        "src": "upload/music/Sanctuary (Ending).mp4",
+        "image": "upload/Images/Sactuary.jpg"
+      }
+    ]
+  }
+  
