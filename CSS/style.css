@@ -28,6 +28,7 @@ main {
 
 /* Styles pour la playlist */
 .playlist {
+    font-family: 'Kingdom Hearts', sans-serif; /* Utilisation de la police Kingdom Hearts */
     display: flex; /* Utiliser le modèle de boîte flex pour aligner les éléments sur la même ligne */
     flex-wrap: wrap; /* Permettre le retour à la ligne des éléments lorsque l'espace est insuffisant */
     justify-content: space-between; /* Distribuer les éléments horizontalement avec un espacement égal entre eux */
@@ -178,20 +179,58 @@ footer {
 }
 
 /* Styles pour le disque vinyle */
+/* Styles pour le disque vinyle */
 .vinyl {
-    position: absolute;
-    bottom: 20px; /* Ajuster la position verticale */
-    left: 70%; /* Décaler davantage vers la droite */
+    position: relative;
+    bottom: 20px;
+    left: 50%;
     transform: translateX(-50%);
-    width: 250px; /* Nouvelle largeur */
-    height: 250px; /* Nouvelle hauteur */
+    width: 250px;
+    height: 250px;
     z-index: 1;
-    animation: rotateVinyl 3s linear infinite; /* Ajouter l'animation */
-    transform-origin: center center; /* Spécifier le centre de rotation */
+    animation: rotateVinyl 3s linear infinite;
+    transform-origin: center center;
+    animation-play-state: paused;
 }
 
-/* Définir l'animation de rotation du disque vinyle */
+.vinyl-cover {
+    width: 100px; /* Largeur de l'image */
+    height: 100px; /* Hauteur de l'image */
+    object-fit: cover; /* Ajustement de la taille de l'image pour couvrir le conteneur */
+    border-radius: 50%; /* Pour donner à l'image une forme circulaire */
+    position: absolute; /* Position absolue par rapport au conteneur (vinyle) */
+    top: 33.3%; /* Aligner l'image de la jaquette au milieu du vinyle verticalement */
+    left: 50%; /* Aligner l'image de la jaquette au milieu du vinyle horizontalement */
+    transform: translate(-50%, -50%); /* Décaler l'image de la jaquette de moitié de sa taille pour la centrer */
+    z-index: 2; /* Assure que l'image de la jaquette apparaît au-dessus du vinyle */
+    animation: rotateVinyl 3s linear infinite; /* Ajouter l'animation */
+    animation-play-state: paused;
+}
+
 @keyframes rotateVinyl {
     from { transform: translateX(-50%) rotate(0deg); } /* Début de l'animation - pas de rotation */
     to { transform: translateX(-50%) rotate(360deg); } /* Fin de l'animation - rotation complète (360 degrés) */
 }
+
+/* Ajout des media queries pour rendre le site responsive */
+@media only screen and (max-width: 768px) {
+    main {
+        padding: 10px;
+    }
+
+    .playlist {
+        width: 100%;
+    }
+
+    .playlist li {
+        flex: 0 1 calc(50% - 20px); /* Deux éléments par ligne */
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .playlist li {
+        flex: 0 1 calc(100% - 20px); /* Un élément par ligne */
+    }
+}
+
+

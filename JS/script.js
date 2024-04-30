@@ -1,9 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Récupérer le lecteur audio
     const audioPlayer = document.getElementById('audioPlayer');
-
+    
     // Index de la musique en cours de lecture dans la playlist
     let currentTrackIndex = 0;
+    
+    // Déclarer la variable musicItems globalement
+    let musicItems;
 
     // Charger la liste de lecture à partir du fichier JSON
     fetch('data.json')
@@ -23,17 +26,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Ajouter un gestionnaire d'événements de clic à chaque élément de musique
                 li.addEventListener('click', function() {
                     playMusic(index); // Lancer la musique correspondante à cet index dans la playlist
+                    // Récupérer l'image de la jaquette et l'ajouter au vinyle
+                    const vinylCover = document.querySelector('.vinyl-cover');
+                    vinylCover.src = item.image;
+                    // Mettre à jour l'image au centre du vinyle avec l'image de la piste sélectionnée
+                    const vinylCenterImage = document.querySelector('.vinyl img');
+                    vinylCenterImage.src = item.image;
                 });
                 // Ajouter l'élément li à la liste de lecture
                 document.querySelector('.playlist ul').appendChild(li);
             });
+
+            // Mettre à jour la variable musicItems après le chargement de la playlist
+            musicItems = document.querySelectorAll('.music-item');
         })
         .catch(error => console.error('Erreur lors du chargement du fichier JSON :', error));
 
     // Fonction pour lancer la lecture de la musique à partir d'un index spécifié
     function playMusic(index) {
         // Récupérer tous les éléments de musique de la playlist après le chargement du fichier JSON
-        const musicItems = document.querySelectorAll('.music-item');
         const musicItem = musicItems[index];
         if (musicItem) {
             const musicSrc = musicItem.dataset.src;
@@ -85,7 +96,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function playNextTrack() {
         currentTrackIndex++; // Incrémenter l'index de la piste
         // Vérifier si nous avons atteint la fin de la playlist
-        const musicItems = document.querySelectorAll('.music-item');
         if (currentTrackIndex >= musicItems.length) {
             // Si la playlist est terminée, demander à l'utilisateur s'il veut redémarrer la lecture
             const restart = confirm("La playlist est terminée. Souhaitez-vous redémarrer ?");
@@ -113,13 +123,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (audioPlayer.paused) {
             // Si la musique est en pause, démarrer la lecture et mettre à jour l'icône
             audioPlayer.play();
-            playPauseIcon.src = "upload/Bouton/play.jpg";
+            playPauseIcon.src = "upload/Bouton/play-removebg-preview.png";
             // Déclencher la rotation du disque vinyle
             rotateVinyl(true);
         } else {
             // Si la musique est en cours de lecture, mettre en pause et mettre à jour l'icône
             audioPlayer.pause();
-            playPauseIcon.src = "upload/Bouton/pause.jpg";
+            playPauseIcon.src = "upload/Bouton/pause-removebg-preview.png";
             // Arrêter la rotation du disque vinyle
             rotateVinyl(false);
         }
@@ -156,15 +166,28 @@ document.addEventListener('DOMContentLoaded', function() {
     randomButton.addEventListener('click', function() {
         // Lancer la lecture d'une piste aléatoire
         playMusic(Math.floor(Math.random() * musicItems.length));
+
+        // Mettre à jour l'image de la jaquette avec celle de la piste aléatoire
+        const randomMusicItem = musicItems[currentTrackIndex];
+        const randomMusicImage = randomMusicItem.querySelector('img');
+        const vinylCover = document.querySelector('.vinyl-cover');
+        vinylCover.src = randomMusicImage.src;
+
+        // Mettre à jour l'image au centre du vinyle avec l'image de la piste aléatoire
+        const vinylCenterImage = document.querySelector('.vinyl img');
+        vinylCenterImage.src = randomMusicImage.src;
     });
 
     // Fonction pour faire tourner le disque vinyle
     function rotateVinyl(rotate) {
         const vinyl = document.querySelector('.vinyl');
+        const vinylCover = document.querySelector('.vinyl-cover');
         if (rotate) {
             vinyl.style.animationPlayState = 'running'; // Démarrer l'animation de rotation
+            vinylCover.style.animationPlayState = 'running'; // Démarrer l'animation de la jaquette
         } else {
             vinyl.style.animationPlayState = 'paused'; // Mettre en pause l'animation de rotation
+            vinylCover.style.animationPlayState = 'paused'; // Mettre en pause l'animation de la jaquette
         }
     }
 });
