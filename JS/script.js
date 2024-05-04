@@ -9,38 +9,35 @@ document.addEventListener('DOMContentLoaded', function() {
     let musicItems;
 
     // Charger la liste de lecture à partir du fichier JSON
-    fetch('data.json')
-        .then(response => response.json())
-        .then(data => {
-            const playlist = data.playlist;
-            // Parcourir chaque élément de musique de la playlist
-            playlist.forEach(function(item, index) {
-                // Créer un élément li pour chaque musique dans la playlist
-                const li = document.createElement('li');
-                li.classList.add('music-item');
-                li.dataset.src = item.src;
-                li.innerHTML = `
-                    <img src="${item.image}" alt="${item.title}">
-                    <p class="music-title">${item.title}</p>
-                `;
-                // Ajouter un gestionnaire d'événements de clic à chaque élément de musique
-                li.addEventListener('click', function() {
-                    playMusic(index); // Lancer la musique correspondante à cet index dans la playlist
-                    // Récupérer l'image de la jaquette et l'ajouter au vinyle
-                    const vinylCover = document.querySelector('.vinyl-cover');
-                    vinylCover.src = item.image;
-                    // Mettre à jour l'image au centre du vinyle avec l'image de la piste sélectionnée
-                    const vinylCenterImage = document.querySelector('.vinyl img');
-                    vinylCenterImage.src = item.image;
-                });
-                // Ajouter l'élément li à la liste de lecture
-                document.querySelector('.playlist ul').appendChild(li);
-            });
+   fetch('https://api-musique-backend.onrender.com/api/v1/musique')
+    .then(response => response.json())
+    .then(data => {
+        const musics = data.musics; // Accéder à la propriété "musics" dans les données renvoyées
+        musics.forEach(function(music, index) {
+            const li = document.createElement('li');
+            li.classList.add('music-item');
+            // Remplacez 'https://votre-serveur.com/chemin-vers-votre-repertoire-audio/' par le chemin réel de votre répertoire audio sur votre serveur
+            li.dataset.src = `https://api-musique-backend.onrender.com/api/v1/music/${music.src}`;
 
-            // Mettre à jour la variable musicItems après le chargement de la playlist
-            musicItems = document.querySelectorAll('.music-item');
-        })
-        .catch(error => console.error('Erreur lors du chargement du fichier JSON :', error));
+            li.innerHTML = `
+                <img src="https://api-musique-backend.onrender.com/api/v1/images/${music.image}" alt="${music.title}"><!-- Utilisation du chemin correct pour l'image -->
+                <p class="music-title">${music.title}</p>
+            `;
+            li.addEventListener('click', function() {
+                playMusic(index);
+                const vinylCover = document.querySelector('.vinyl-cover');
+                vinylCover.src = `https://api-musique-backend.onrender.com/api/v1/images/${music.image}`; // Utilisation du chemin correct pour l'image
+                const vinylCenterImage = document.querySelector('.vinyl img');
+                vinylCenterImage.src = `https://api-musique-backend.onrender.com/api/v1/images/${music.image}`; // Utilisation du chemin correct pour l'image
+            });
+            document.querySelector('.playlist ul').appendChild(li);
+        });
+        musicItems = document.querySelectorAll('.music-item');
+    })
+    .catch(error => console.error('Erreur lors du chargement du fichier JSON :', error));
+
+
+
 
     // Fonction pour lancer la lecture de la musique à partir d'un index spécifié
     function playMusic(index) {
@@ -191,3 +188,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
